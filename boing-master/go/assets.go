@@ -1,41 +1,59 @@
 package main
 
 import (
-	"path/filepath"
+	"embed"
 
 	"github.com/Zyko0/go-sdl3/img"
 	"github.com/Zyko0/go-sdl3/sdl"
 )
 
-// Assets caches textures loaded from the images directory and provides the two
+// imagesFS embeds every PNG in images/ into the binary, so the game is fully
+// self-contained and needs no asset files at run time.
+//
+//go:embed images
+var imagesFS embed.FS
+
+// Assets caches textures decoded from the embedded images and provides the two
 // blit modes we need: top-left anchored (for backgrounds and UI) and centre
 // anchored (for actors).
 type Assets struct {
 	renderer *sdl.Renderer
-	dir      string
 	textures map[string]*sdl.Texture
 }
 
-func NewAssets(renderer *sdl.Renderer, assetDir string) *Assets {
+func NewAssets(renderer *sdl.Renderer) *Assets {
 	return &Assets{
 		renderer: renderer,
-		dir:      filepath.Join(assetDir, "images"),
 		textures: make(map[string]*sdl.Texture),
 	}
 }
 
-// Texture lazily loads images/<name>.png and caches it. A load failure returns
-// nil, which the blit helpers treat as a no-op so a single missing sprite never
-// crashes the game.
+// Texture lazily decodes the embedded images/<name>.png and caches it. A load
+// failure returns nil, which the blit helpers treat as a no-op so a single
+// missing sprite never crashes the game.
 func (a *Assets) Texture(name string) *sdl.Texture {
 	if tex, ok := a.textures[name]; ok {
 		return tex
 	}
-	tex, err := img.LoadTexture(a.renderer, filepath.Join(a.dir, name+".png"))
+	a.textures[name] = loadTextureFromFS(a.renderer, imagesFS, "images/"+name+".png")
+	return a.textures[name]
+}
+
+// loadTextureFromFS decodes an embedded image file into a texture via an
+// in-memory SDL IOStream (no filesystem access).
+func loadTextureFromFS(renderer *sdl.Renderer, fs embed.FS, path string) *sdl.Texture {
+	data, err := fs.ReadFile(path)
 	if err != nil {
-		tex = nil
+		return nil
 	}
-	a.textures[name] = tex
+	stream, err := sdl.IOFromConstMem(data)
+	if err != nil {
+		return nil
+	}
+	tex, err := img.LoadTextureIO(renderer, stream, true) // closeio: frees the stream
+	if err != nil {
+		return nil
+	}
 	return tex
 }
 

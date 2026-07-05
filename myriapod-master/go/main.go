@@ -135,7 +135,6 @@ func draw() {
 }
 
 func main() {
-	assetDir := flag.String("assets", "..", "directory containing images/, sounds/, music/")
 	flag.Parse()
 
 	defer binsdl.Load().Unload()
@@ -154,9 +153,9 @@ func main() {
 	defer window.Destroy()
 	defer renderer.Destroy()
 
-	assets = NewAssets(renderer, *assetDir)
+	assets = NewAssets(renderer)
 	defer assets.Destroy()
-	audio = NewAudio(*assetDir)
+	audio = NewAudio()
 	defer audio.Destroy()
 
 	state = StateMenu
@@ -169,6 +168,9 @@ func main() {
 		var event sdl.Event
 		for sdl.PollEvent(&event) {
 			if event.Type == sdl.EVENT_QUIT {
+				return sdl.EndLoop
+			}
+			if event.Type == sdl.EVENT_KEY_DOWN && event.KeyboardEvent().Scancode == sdl.SCANCODE_ESCAPE {
 				return sdl.EndLoop
 			}
 		}

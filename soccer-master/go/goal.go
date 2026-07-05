@@ -36,8 +36,8 @@ func (g *Goal) active() bool {
 	return math.Abs(game.ball.vpos.Y-g.vpos.Y) < 500
 }
 
-func (g *Goal) Pos() Vec2    { return g.vpos }
-func (g *Goal) TeamID() int  { return g.team }
+func (g *Goal) Pos() Vec2   { return g.vpos }
+func (g *Goal) TeamID() int { return g.team }
 
 type Team struct {
 	controls            *Controls
