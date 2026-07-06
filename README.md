@@ -1,16 +1,33 @@
-# Code-the-Classics vol.1: Golang ports
+# Go ports of the Python code from _Code-the-Classics vol.1_
 
-The book [Code the Classics, vol.1](https://magazine.raspberrypi.com/books/code-the-classics-vol-I-2ed) describes several games programmed using Python and the pygame-zero library. The original codes and assets are provided at https://github.com/raspberrypipress/Code-the-Classics-Vol1
+The book [Code the Classics, vol.1](https://magazine.raspberrypi.com/books/code-the-classics-vol-I-2ed) describes several games programmed using Python and the pygame-zero library. 
 
-This fork contains ports of the original Python codes to the [Go programming language](http://go.dev), using the [go-sdl3](https://github.com/Zyko0/go-sdl3). 
-The Go code was generate by Claude code under my supervision. Note: we had to move the assets in the go subfolders to embed the asses in the go binaries, so the python script will no longer find the assets. Use the original repo if you want to run the python scripts.
+The original codes, in Python, and the assets are provided at https://github.com/raspberrypipress/Code-the-Classics-Vol1
 
-One of the advantages of Go with respect to Python is that Go can produce self-contained binaries which can be redistributed.
+We translated, the original Python codes to the [Go programming language](http://go.dev), using the [go-sdl3](https://github.com/Zyko0/go-sdl3). 
 
-(TODO: implement CD/CI to release binaries for the most common platform on github.)
+We had two motivations:
+
+- to check how go-sdl3 compares to python-pygame, for educational purposes
+- to produce ready-to-run, self-contained binaries
 
 
-Christophe Pallier <christophe@pallier.org>  2026-07-05
+The Go ports are in independent repositories:
+
+* avenger-go	https://github.com/chrplr/avenger-go
+* boing-go	https://github.com/chrplr/boing-go
+* cavern-go	https://github.com/chrplr/cavern-go
+* eggzy-go	https://github.com/chrplr/eggzy-go
+* kinetix-go	https://github.com/chrplr/kinetix-go
+* leadingedge-go	https://github.com/chrplr/leadingedge-go
+* myriapod-go	https://github.com/chrplr/myriapod-go
+* soccer-go	https://github.com/chrplr/soccer-go
+
+Notes:
+* A small library, [pgzgo](http://github.com:chrplr/pgzgo) was created to avoid duplication across the projects.
+* Compilation relies (for now) on a fork of [go-sdl3](https://github.com/Zyko0/go-sdl3): https://github.com/chrplr/go-sdl3-wasm/tree/wasm-render-fixes
+
+Christophe Pallier <christophe@pallier.org>  2026-07-06
 
 
 
