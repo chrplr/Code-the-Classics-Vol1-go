@@ -1,10 +1,16 @@
-# Go ports of the Games from _Code-the-Classics vol.1_
+# Go ports of the Arcade Games from _Code-the-Classics vol.1_
 
-The book [Code the Classics, vol.1](https://magazine.raspberrypi.com/books/code-the-classics-vol-I-2ed) describes several games programmed using Python and the pygame-zero library. 
+The book [Code the Classics,
+vol.1](https://magazine.raspberrypi.com/books/code-the-classics-vol-I-2ed)
+describes several arcade games programmed using Python and the
+pygame-zero library.
 
-The original codes, in Python, and the assets are provided at https://github.com/raspberrypipress/Code-the-Classics-Vol1
+The original codes, in Python, and the assets are provided at
+https://github.com/raspberrypipress/Code-the-Classics-Vol1
 
-We translated, the original Python codes to the [Go programming language](http://go.dev), using the [go-sdl3](https://github.com/Zyko0/go-sdl3). 
+We translated, the original Python codes to the [Go programming
+language](http://go.dev), using the
+[go-sdl3](https://github.com/Zyko0/go-sdl3) library.
 
 We had two motivations:
 
