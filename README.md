@@ -1,4 +1,4 @@
-# Go ports of the Python code from _Code-the-Classics vol.1_
+# Go ports of the Games from _Code-the-Classics vol.1_
 
 The book [Code the Classics, vol.1](https://magazine.raspberrypi.com/books/code-the-classics-vol-I-2ed) describes several games programmed using Python and the pygame-zero library. 
 
