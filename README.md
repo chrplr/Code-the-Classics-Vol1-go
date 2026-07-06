@@ -23,7 +23,7 @@ The Go ports are in independent repositories:
 * soccer-go	https://github.com/chrplr/soccer-go ([play it!](https://chrplr.github.io/soccer-go/))
 
 Notes:
-* A small library, [pgzgo](http://github.com:chrplr/pgzgo) was created to avoid duplication across the projects.
+* A small library, [pgzgo](http://github.com/chrplr/pgzgo) was created to avoid duplication across the projects.
 * Compilation relies (for now) on a fork of [go-sdl3](https://github.com/Zyko0/go-sdl3): https://github.com/chrplr/go-sdl3-wasm/tree/wasm-render-fixes
 
 Christophe Pallier <christophe@pallier.org>  2026-07-06
